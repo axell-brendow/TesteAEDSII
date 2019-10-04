@@ -10,9 +10,8 @@
 #define TAMLINHA   1000
 
 bool isFim(char* s){
-   return (strlen(s) >= 3 && s[0] == 'F' && s[1] == 'I' && s[2] == 'M');
+	return (strlen(s) >= 3 && s[0] == 'F' && s[1] == 'I' && s[2] == 'M');
 }
-
 
 typedef struct Time {
 	char* arquivo;
@@ -27,20 +26,25 @@ typedef struct Time {
 	int fundacaoMes;
 	int fundacaoAno;
 	long paginaTam;
-}Time;
+} Time;
 
 // void passStruct ( Time *time)
 
 void lerArquivo (char* filename, Time *time)
 {
+	filename[strlen(filename) - 1] = '\0';
 	FILE* arquivo = fopen(filename,"rt");
+	printf("filename = %s, arq = %p\n", filename, arquivo);
 	char linha[30000];
-        fseek(arquivo,0,SEEK_SET);
-        do
+	fseek(arquivo,0,SEEK_SET);
+
+	do
 	{
 		fgets(linha,30000,arquivo);
-                printf("\n%s", linha);	
-	}while ( !feof(arquivo)  );
+		printf("\n%s", linha);	
+
+	} while ( !feof(arquivo)  );
+
 	//printf ("\n%s", linha);
 	time->paginaTam = ftell(arquivo);
 	fclose(arquivo);
@@ -54,15 +58,14 @@ void main ()
 	char* nome = "";
 	int numEntrada = 0;
 	int numEntrada2 = 0;
-	
-	do{
 
-        printf("\nTA FUNCIONANDO");
+	do
+	{
 		fgets(linha[numEntrada], TAMLINHA, stdin);
-	}while(isFim(linha[numEntrada++]) == false);
-	numEntrada--;
 
-        printf("\nADOASOOAGSOA");
+	} while(isFim(linha[numEntrada++]) == false);
+
+	numEntrada--;
 	/*for ( int x = 0; x < numEntrada; x++ )
 	{
 	printf("%s",linha[x]);
